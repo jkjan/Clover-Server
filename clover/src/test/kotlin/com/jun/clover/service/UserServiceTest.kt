@@ -16,7 +16,7 @@ internal class UserServiceTest (@Autowired private val userService: UserService)
     @Test
     fun userRegister() {
         val test = User("test", "신한", "테스트", 30, "카카오톡", "2020-01-11")
-        userService.userRegister(test)
+        userService.registerUser(test)
         val testUser = userService.userFindById("test").get()
         assertEquals(testUser.id, test.id)
     }
@@ -25,9 +25,9 @@ internal class UserServiceTest (@Autowired private val userService: UserService)
     @Test
     fun userUpdate() {
         val test = User("test", "신한", "테스트", 30, "카카오톡", "2020-01-11")
-        userService.userRegister(test)
+        userService.registerUser(test)
         test.name = "변경"
-        userService.userUpdate(test)
+        userService.updateUser(test)
         val testUser = userService.userFindById("test").get()
         assertEquals(testUser.name, "변경")
     }
@@ -36,8 +36,8 @@ internal class UserServiceTest (@Autowired private val userService: UserService)
     @Test
     fun userAddPoint() {
         val test = User("test", "신한", "테스트", 30, "카카오톡", "2020-01-11")
-        userService.userRegister(test)
-        userService.userModifyPoint("test", 100)
+        userService.registerUser(test)
+        userService.modifyUserPoint("test", 100)
         val testUser = userService.userFindById("test").get()
         assertEquals(testUser.point, 130)
     }

@@ -13,5 +13,8 @@ class CloverValidService (private val cloverValidRepository: CloverValidReposito
     }
 
     // 현재 구매된 클로버 리스트
-    fun purchasedCloverList() : List<CloverValid> = cloverValidRepository.findAll()
+    fun getPurchasedCloverList() : List<CloverValid> = cloverValidRepository.findAll()
+
+    // 클로버 전체 삭제 (추첨 완료 시)
+    fun deleteTodayClover() = cloverValidRepository.deleteAll()
 }

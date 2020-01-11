@@ -19,6 +19,6 @@ class UserAspect {
             e.printStackTrace()
         }
         val tok = System.currentTimeMillis()
-        println(String.format("creating a hello done in %.4f seconds", ((tok - tik).toDouble()/1000)))
+        println(String.format("creating a user done in %.4f seconds", ((tok - tik).toDouble()/1000)))
     }
 }

@@ -14,7 +14,7 @@ internal class CloverValidServiceTest (@Autowired private val cloverValidService
     fun purchaseClover() {
         cloverValidService.purchaseClover("test")
         cloverValidService.purchaseClover("test2")
-        val testClover = cloverValidService.purchasedCloverList()
+        val testClover = cloverValidService.getPurchasedCloverList()
         val a = testClover[testClover.size-1].cloverNum
         val b = testClover[testClover.size-2].cloverNum
         assertEquals(a > b, true)

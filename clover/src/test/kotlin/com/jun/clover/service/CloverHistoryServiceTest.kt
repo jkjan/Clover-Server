@@ -13,9 +13,9 @@ import org.springframework.test.context.junit.jupiter.SpringExtension
 internal class CloverHistoryServiceTest (@Autowired private val cloverHistoryService: CloverHistoryService) {
     @Test
     fun purchaseClover() {
-        val before = cloverHistoryService.todayClover().prizeClover
+        val before = cloverHistoryService.getTodayClover().prizeClover
         cloverHistoryService.purchaseClover()
-        val after = cloverHistoryService.todayClover().prizeClover
+        val after = cloverHistoryService.getTodayClover().prizeClover
         assertEquals(after == before + 10, true)
     }
 }
