@@ -12,5 +12,6 @@ interface CloverHistoryRepository : JpaRepository<CloverHistory, Int> {
     @Query(value = "update clover_history ch set ch.prize_clover = ch.prize_clover + 10 where ch.date_clover = curdate()", nativeQuery = true)
     fun updatePrize() : Int
 
-    fun findCloverHistoryByDateClover(date_clover : String) : List<CloverHistory>
+    // 오늘의 클로버 반환
+    fun findCloverHistoryByDateClover(date_clover : String) : CloverHistory
 }

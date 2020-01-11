@@ -6,5 +6,4 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface CloverValidRepository : JpaRepository<CloverValid, Int> {
-
 }

@@ -24,7 +24,7 @@ class UserController (private val userService: UserService) {
         userService.userUpdate(user)
     }
 
-    // 포인트 추가
+    // 포인트 증가/감소
     @PutMapping(path = ["/user/{id}/point/{add}"])
     fun userAddPoint(@PathVariable ("id") id : String, @PathVariable("add") add : Int) {
         userService.userModifyPoint(id, add)

@@ -12,6 +12,6 @@ class CloverValidService (private val cloverValidRepository: CloverValidReposito
         cloverValidRepository.save(CloverValid(id))
     }
 
-    // 구매된 클로버 리스트
+    // 현재 구매된 클로버 리스트
     fun purchasedCloverList() : List<CloverValid> = cloverValidRepository.findAll()
 }

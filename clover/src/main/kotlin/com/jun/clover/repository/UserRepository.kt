@@ -12,5 +12,6 @@ interface UserRepository : JpaRepository<User, String> {
     @Transactional
     @Modifying
     @Query("update User u set u.point = u.point + ?2 where u.id = ?1")
+    // 포인트 추가/감소
     fun modifyPoint(id : String, add : Int) : Int
 }
