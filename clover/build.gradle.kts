@@ -39,7 +39,11 @@ dependencies {
 	//providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
 	testImplementation("org.springframework.boot:spring-boot-starter-test") {
 		exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
+		exclude(module = "junit")
 	}
+	testImplementation("org.junit.jupiter:junit-jupiter:5.5.2")
+	testImplementation("org.jetbrains.kotlin:kotlin-test-junit5:1.3.50")
+	testImplementation("org.assertj:assertj-core:3.13.2")
 }
 
 tasks.withType<Test> {
@@ -51,4 +55,8 @@ tasks.withType<KotlinCompile> {
 		freeCompilerArgs = listOf("-Xjsr305=strict")
 		jvmTarget = "1.8"
 	}
+}
+
+tasks.withType<Test> {
+	useJUnitPlatform()
 }

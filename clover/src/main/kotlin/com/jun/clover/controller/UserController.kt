@@ -2,7 +2,6 @@ package com.jun.clover.controller
 
 import com.jun.clover.entity.User
 import com.jun.clover.service.UserService
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 import javax.validation.Valid
 import javax.validation.constraints.NotNull
@@ -21,7 +20,15 @@ class UserController (private val userService: UserService) {
     @PutMapping(path = ["/user/{id}"])
     fun updateUser(@PathVariable ("id") id : String, @Valid @NotNull @RequestBody user : User) = userService.updateUser(user)
 
+    // 사용자 삭제
+    @DeleteMapping(path = ["/user/{id}"])
+    fun deleteUser(@PathVariable("id") id : String) = userService.deleteUserById(id)
+
     // 포인트 증가/감소
-    @PutMapping(path = ["/user/{id}/point/{modify}"])
+    @PatchMapping(path = ["/user/{id}/point/{modify}"])
     fun modifyUserPoint(@PathVariable ("id") id : String, @PathVariable("modify") add : Int) = userService.modifyUserPoint(id, add)
+
+    // 아이디로 사용자 찾기
+    @GetMapping(path = ["/user/{id}"])
+    fun findUserById(@PathVariable ("id") id : String) = userService.findUserById(id)
 }
