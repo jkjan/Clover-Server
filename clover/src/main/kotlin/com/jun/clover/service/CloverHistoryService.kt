@@ -10,6 +10,9 @@ import java.util.*
 
 @Service
 class CloverHistoryService (private val cloverHistoryRepository: CloverHistoryRepository) {
+    // 클로버 회차 추가
+    fun createCloverHistory() = cloverHistoryRepository.save(CloverHistory())
+
     // 당첨금 증가
     fun purchaseClover() = cloverHistoryRepository.updatePrize()
 
