@@ -19,4 +19,11 @@ internal class CloverValidServiceTest (@Autowired private val cloverValidService
         val b = testClover[testClover.size-2].cloverNum
         assertEquals(a > b, true)
     }
+
+    @Test
+    fun deleteTodayClover() {
+        cloverValidService.deleteTodayClover()
+        val test = cloverValidService.getPurchasedCloverList().size
+        assertEquals(test, 0)
+    }
 }

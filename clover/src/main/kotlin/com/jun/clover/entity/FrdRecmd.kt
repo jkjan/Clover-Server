@@ -4,7 +4,7 @@ import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.Id
 
-@Entity
+@Entity(name = "frd_recmd")
 class FrdRecmd (
        @Id
        @Column(name = "recmd_code", insertable=false, updatable=false)

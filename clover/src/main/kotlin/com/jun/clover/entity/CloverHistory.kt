@@ -2,7 +2,7 @@ package com.jun.clover.entity
 
 import javax.persistence.*
 
-@Entity
+@Entity(name = "clover_history")
 class CloverHistory (
         @Id
         @Column(name = "draw_clover", insertable=false, updatable=false)

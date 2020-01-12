@@ -2,6 +2,7 @@ package com.jun.clover.controller
 
 import com.jun.clover.entity.CloverValid
 import com.jun.clover.service.CloverValidService
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 
 @RestController

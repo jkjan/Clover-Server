@@ -2,6 +2,7 @@ package com.jun.clover.service
 
 import com.jun.clover.entity.CloverValid
 import com.jun.clover.repository.CloverValidRepository
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import java.sql.Time
 

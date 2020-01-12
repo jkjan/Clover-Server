@@ -2,6 +2,7 @@ package com.jun.clover.service
 
 import com.jun.clover.entity.User
 import com.jun.clover.repository.UserRepository
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
 @Service

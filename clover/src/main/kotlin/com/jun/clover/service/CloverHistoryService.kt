@@ -2,6 +2,7 @@ package com.jun.clover.service
 
 import com.jun.clover.entity.CloverHistory
 import com.jun.clover.repository.CloverHistoryRepository
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import java.text.SimpleDateFormat
 import java.time.LocalDate
