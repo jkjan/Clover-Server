@@ -25,6 +25,7 @@ internal class CloverHistoryServiceTest (@Autowired private val cloverHistorySer
 
     @Test
     @Order(7)
+    // 주의 : 테스트 전 오늘 날짜 클로버를 지우고 테스트할 것
     fun `클로버 회차 추가 테스트`() {
         cloverHistoryService.createCloverHistory()
         val test : CloverHistory? = cloverHistoryService.getTodayClover()
