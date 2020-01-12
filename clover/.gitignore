@@ -30,3 +30,6 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### MySQL properties ###
+application.properties
