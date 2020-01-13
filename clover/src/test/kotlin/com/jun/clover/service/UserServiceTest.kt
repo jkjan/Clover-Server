@@ -19,7 +19,7 @@ internal class UserServiceTest (@Autowired private val userService: UserService)
     @Test
     @Order(1)
     fun `사용자 등록 테스트`() {
-        val test = User("test", "신한", "테스트", 30, "카카오톡", "2020-01-11")
+        val test = User("test", "테스트",  "카카오톡")
         userService.registerUser(test)
         val testUser = userService.findUserById("test").get()
         assertEquals(testUser.id, test.id)
@@ -28,7 +28,7 @@ internal class UserServiceTest (@Autowired private val userService: UserService)
     @Test
     @Order(2)
     fun `사용자 정보 수정 테스트`() {
-        val test = User("test", "신한", "테스트", 30, "카카오톡", "2020-01-11")
+        val test = User("test", "테스트", "카카오톡")
         userService.registerUser(test)
         test.name = "변경"
         userService.updateUser(test)
@@ -39,11 +39,11 @@ internal class UserServiceTest (@Autowired private val userService: UserService)
     @Test
     @Order(3)
     fun `사용자 포인트 변동 테스트`() {
-        val test = User("test", "신한", "테스트", 30, "카카오톡", "2020-01-11")
+        val test = User("test", "테스트",  "카카오톡")
         userService.registerUser(test)
         userService.modifyUserPoint("test", 100)
         val testUser = userService.findUserById("test").get()
-        assertEquals(testUser.point, 130)
+        assertEquals(testUser.point, 100)
     }
 
     @Test

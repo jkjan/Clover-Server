@@ -10,7 +10,7 @@ class CashoutHistoryService (private val cashoutHistoryRepository: CashoutHistor
     fun createCashoutHistory(cashoutHistory: CashoutHistory) = cashoutHistoryRepository.save(cashoutHistory)
 
     // 유저의 캐시아웃 이력
-    fun getCashoutHistoryById(idCashout : String) : List<CashoutHistory>? = cashoutHistoryRepository.findCashoutHistoryByIdCashout(idCashout)
+    fun getCashoutHistoryById(idCashout : String) : List<CashoutHistory> = cashoutHistoryRepository.findCashoutHistoryByIdCashout(idCashout)
 
     // 모든 캐시아웃 이력
     fun getAllCashoutHistory(): List<CashoutHistory> = cashoutHistoryRepository.findAll()

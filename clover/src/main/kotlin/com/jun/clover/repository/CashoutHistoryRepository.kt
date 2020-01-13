@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface CashoutHistoryRepository : JpaRepository<CashoutHistory, Int> {
-    fun findCashoutHistoryByIdCashout(idCashout : String) : List<CashoutHistory>?
+    fun findCashoutHistoryByIdCashout(idCashout : String) : List<CashoutHistory>
 }

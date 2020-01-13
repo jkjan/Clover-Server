@@ -31,16 +31,14 @@ internal class CashoutHistoryServiceTest(@Autowired private val cashoutHistorySe
     @Order(10)
     fun `캐시아웃 아이디로 찾기 테스트`() {
         val test = cashoutHistoryService.getCashoutHistoryById("test")
-        var flag = true
-        if (test != null) {
+        if (test.isEmpty())
+            assertTrue(true)
+        else {
             for (i in test.indices) {
                 if (test[i].idCashout != "test") {
-                    flag = false
+                    assertTrue(false)
                 }
             }
-            assertTrue(flag)
-        }
-        else {
             assertTrue(true)
         }
     }

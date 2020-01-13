@@ -5,12 +5,14 @@ import javax.persistence.*
 
 @Entity(name = "ad_ms")
 class AdMs (
-        @Id
-        @Column(name = "ad_id_ms", insertable=false, updatable=false)
-        val adIdMs : Int,
         val companyMs : String,
         var linkMs : String,
-        var dateMs : String,
         var imgMs : File,
-        var profitMs : Int
-        )
+        var profitMs : Int) {
+        @Id
+        @Column(name = "ad_id_ms", insertable = false, updatable = false)
+        val adIdMs : Int = 0
+
+        @Column(name = "date_ms", insertable = false, updatable = false)
+        lateinit var dateMs : String
+}

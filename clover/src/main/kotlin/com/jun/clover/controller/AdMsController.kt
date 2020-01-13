@@ -7,6 +7,11 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 class AdMsController (private val adMsService: AdMsService) {
-    @GetMapping(path = ["/ad/main"])
+    // 모든 광고
+    @GetMapping(path = ["/ad/main/all"])
     fun getAllAdMs() : List<AdMs> = adMsService.getAllAdMs()
+
+    // 광고 랜덤하게 하나
+    @GetMapping(path = ["/ad/main"])
+    fun getRandomAdMs() : AdMs = adMsService.getRandomAdMs()
 }

@@ -7,4 +7,6 @@ import org.springframework.stereotype.Service
 @Service
 class AdMsService (private val adMsRepository: AdMsRepository) {
     fun getAllAdMs() : List<AdMs> = adMsRepository.findAll()
+
+    fun getRandomAdMs() : AdMs = adMsRepository.findRandomAdMs()
 }
