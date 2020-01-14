@@ -1,6 +1,7 @@
 package com.jun.clover.service
 
-import com.jun.clover.entity.User
+import com.jun.clover.user.User
+import com.jun.clover.user.UserService
 import org.junit.jupiter.api.Test
 
 import org.junit.jupiter.api.Assertions.*
@@ -19,7 +20,7 @@ internal class UserServiceTest (@Autowired private val userService: UserService)
     @Test
     @Order(1)
     fun `사용자 등록 테스트`() {
-        val test = User("test", "테스트",  "카카오톡")
+        val test = User("test", "테스트", "카카오톡")
         userService.registerUser(test)
         val testUser = userService.findUserById("test").get()
         assertEquals(testUser.id, test.id)
@@ -35,16 +36,16 @@ internal class UserServiceTest (@Autowired private val userService: UserService)
         val testUser = userService.findUserById("test").get()
         assertEquals(testUser.name, "변경")
     }
-
-    @Test
-    @Order(3)
-    fun `사용자 포인트 변동 테스트`() {
-        val test = User("test", "테스트",  "카카오톡")
-        userService.registerUser(test)
-        userService.modifyUserPoint("test", 100)
-        val testUser = userService.findUserById("test").get()
-        assertEquals(testUser.point, 100)
-    }
+//
+//    @Test
+//    @Order(3)
+//    fun `사용자 포인트 변동 테스트`() {
+//        val test = User("test", "테스트", "카카오톡")
+//        userService.registerUser(test)
+//        userService.modifyUserPoint("test", 100)
+//        val testUser = userService.findUserById("test").get()
+//        assertEquals(testUser.point, 100)
+//    }
 
     @Test
     @Order(4)

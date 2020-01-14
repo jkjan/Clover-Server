@@ -1,6 +1,9 @@
 package com.jun.clover.service
 
-import com.jun.clover.repository.FrdRecmdRepository
+import com.jun.clover.frdrecmd.FrdRecmdRepository
+import com.jun.clover.frdrecmd.FrdRecmdService
+import com.jun.clover.user.UserService
+import com.jun.clover.variable.Price
 import org.junit.jupiter.api.Test
 
 import org.junit.jupiter.api.Assertions.*
@@ -16,7 +19,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension
 @SpringBootTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation::class)
 internal class FrdRecmdServiceTest (@Autowired private val frdRecmdService: FrdRecmdService,
-                                    @Autowired private val frdRecmdRepository: FrdRecmdRepository) {
+                                    @Autowired private val frdRecmdRepository: FrdRecmdRepository,
+                                    @Autowired private val userService: UserService) {
     @Test
     @Order(11)
     fun `추천인 코드 생성 테스트`() {
@@ -44,10 +48,15 @@ internal class FrdRecmdServiceTest (@Autowired private val frdRecmdService: FrdR
     @Test
     @Order(13)
     fun `추천인 코드로 추천인 매칭`() {
+        val beforeUser = userService.findUserById("test")
         val idRecmder = frdRecmdService.matchRecmderByCode("IJVCID", "test3")
+        val afterUser = userService.findUserById("test")
         if (idRecmder != null) {
             println(idRecmder)
-            assertEquals(frdRecmdRepository.findById("IJVCID").get().idRecmdee, "test3")
+            assertEquals(
+                    (frdRecmdRepository.findById("IJVCID").get().idRecmdee == "test3"
+                            && afterUser.get().point == beforeUser.get().point + Price.FRDRECMD.get()
+                            ), true)
         }
         else
             assertTrue(true)

@@ -1,5 +1,9 @@
 package com.jun.clover.service
 
+import com.jun.clover.cloverhistory.CloverHistoryService
+import com.jun.clover.clovervalid.CloverValidService
+import com.jun.clover.user.UserService
+import com.jun.clover.variable.Price
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.MethodOrderer
 import org.junit.jupiter.api.Order
@@ -13,16 +17,25 @@ import org.springframework.test.context.junit.jupiter.SpringExtension
 @ExtendWith(SpringExtension::class)
 @SpringBootTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation::class)
-internal class CloverValidServiceTest (@Autowired private val cloverValidService: CloverValidService) {
+internal class CloverValidServiceTest (@Autowired private val cloverValidService: CloverValidService,
+                                       @Autowired private val cloverHistoryService : CloverHistoryService,
+                                       @Autowired private val userService: UserService) {
     @Test
     @Order(5)
-    fun `클로버 구매, 클로버 번호, 구매 시간 자동 증가 테스트`() {
+    fun `클로버 구매 테스트`() {
+        val beforeUser = userService.findUserById("test")
+        val beforeCloverHistory = cloverHistoryService.getTodayClover()
+        val beforeCloverValid = cloverValidService.getPurchasedCloverList()
         cloverValidService.purchaseClover("test")
-        cloverValidService.purchaseClover("test2")
-        val testClover = cloverValidService.getPurchasedCloverList()
-        val a = testClover[testClover.size-1].cloverNum
-        val b = testClover[testClover.size-2].cloverNum
-        assertEquals(a > b, true)
+        val afterUser = userService.findUserById("test")
+        val afterCloverHistory = cloverHistoryService.getTodayClover()
+        val afterCloverValid = cloverValidService.getPurchasedCloverList()
+        assertEquals(
+                (afterUser.get().point == beforeUser.get().point - Price.CLOVER.get()
+                        && afterCloverHistory.prizeClover == beforeCloverHistory.prizeClover + Price.CLOVER.get()
+                        && afterCloverValid.size == beforeCloverValid.size + 1
+                        )
+                , true)
     }
 
     @Test

@@ -1,6 +1,8 @@
 package com.jun.clover.service
 
-import com.jun.clover.entity.CashoutHistory
+import com.jun.clover.cashouthistory.CashoutHistoryService
+import com.jun.clover.cashouthistory.CashoutHistory
+import com.jun.clover.user.UserService
 import org.junit.jupiter.api.Test
 
 import org.junit.jupiter.api.Assertions.*
@@ -15,16 +17,23 @@ import org.springframework.test.context.junit.jupiter.SpringExtension
 @ExtendWith(SpringExtension::class)
 @SpringBootTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation::class)
-internal class CashoutHistoryServiceTest(@Autowired private val cashoutHistoryService: CashoutHistoryService) {
+internal class CashoutHistoryServiceTest(@Autowired private val cashoutHistoryService: CashoutHistoryService,
+                                         @Autowired private val userService: UserService) {
     @Test
     @Order(9)
-    fun `캐시아웃 후 캐시아웃 횟수, 시간 자동 입력 테스트`() {
-        val before = cashoutHistoryService.getAllCashoutHistory()
-        cashoutHistoryService.createCashoutHistory(CashoutHistory("test", 100))
-        val after = cashoutHistoryService.getAllCashoutHistory()
-        assertTrue(after.size == before.size + 1
-                && after[after.size - 1].idCashout == "test"
-                && after[after.size - 1].cashoutNum > after[after.size - 2].cashoutNum)
+    fun `캐시아웃 테스트`() {
+        val beforeUser = userService.findUserById("test")
+        val beforeCashoutHistory = cashoutHistoryService.getAllCashoutHistory()
+        cashoutHistoryService.createCashoutHistory(CashoutHistory("test", 30))
+        val afterUser = userService.findUserById("test")
+        val afterCashoutHistory = cashoutHistoryService.getAllCashoutHistory()
+
+        assertEquals(
+                (afterUser.get().point == beforeUser.get().point - 30
+                        && afterCashoutHistory.size == beforeCashoutHistory.size + 1
+                        && afterCashoutHistory.last().idCashout == "test")
+                , true
+        )
     }
 
     @Test
