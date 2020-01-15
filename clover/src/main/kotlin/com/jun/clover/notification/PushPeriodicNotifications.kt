@@ -23,7 +23,9 @@ class PushPeriodicNotifications {
 
         val notification = JSONObject()
         notification.put("title", "Hello!")
-        notification.put("body", "Today is $localDate!")
+        notification.put("body", "Today is ${localDate.dayOfWeek.name}!")
+        body.put("notification", notification)
+
         println(body.toString())
         return body.toString()
     }

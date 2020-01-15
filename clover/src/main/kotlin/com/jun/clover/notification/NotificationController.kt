@@ -11,7 +11,7 @@ import java.util.concurrent.ExecutionException
 
 @RestController
 class NotificationController (private val notificationService: NotificationService) {
-    @GetMapping(value = ["/send"])
+    @GetMapping(value = ["/send"], produces = ["application/json"])
     @ResponseBody
     fun send() : ResponseEntity<String> {
         val notifications = PushPeriodicNotifications().periodicNotificationJson()
