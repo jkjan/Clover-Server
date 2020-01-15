@@ -12,21 +12,24 @@ class User (
     val id : String,
 
     // 예금주 (실명)
+    @Column(name = "name")
     var name : String,
 
     // 연결된 앱 (카톡, 페북 등)
-    val connApp : String
+    val connApp : String,
+
+    @Column(name = "email")
+    val email : String
 ) {
     // 포인트
+    @Column(name = "point")
     var point : Int = 0
 
-    @Column(name = "register_date", insertable=false, updatable=false)
-    // 가입일
-    lateinit var registerDate : String
-
     // 은행명
+    @Column(name = "bank")
     var bank : String? = null
 
     // 계좌번호
+    @Column(name = "acc")
     var acc : String? = null
 }

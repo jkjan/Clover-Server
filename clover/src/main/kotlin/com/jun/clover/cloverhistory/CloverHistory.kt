@@ -11,6 +11,6 @@ class CloverHistory() {
         @Column(name = "date_clover", insertable = false, updatable = false)
         lateinit var dateClover: String
         val idClover : String? = null
-        val prizeClover: Int = 0
-        val ratioClover: Double = 0.0
+        var prizeClover: Int = 0
+        var ratioClover: Double? = null
 }
