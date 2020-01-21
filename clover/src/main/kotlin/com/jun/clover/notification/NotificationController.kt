@@ -31,5 +31,4 @@ class NotificationController (private val notificationService: NotificationServi
 
         return ResponseEntity("Push Notification ERROR!", HttpStatus.BAD_REQUEST)
     }
-
 }

@@ -4,6 +4,7 @@ import org.springframework.http.HttpEntity
 import org.springframework.http.client.ClientHttpRequestInterceptor
 import org.springframework.scheduling.annotation.Async
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 import org.springframework.web.client.RestTemplate
 import java.util.concurrent.CompletableFuture
 import javax.swing.text.html.parser.Entity
@@ -14,6 +15,7 @@ class NotificationService {
     private val firebaseApiUrl = "https://fcm.googleapis.com/fcm/send"
 
     @Async
+    @Transactional(rollbackFor = [Exception::class])
     fun send(entity : HttpEntity<String>) : CompletableFuture<String> {
         val restTemplate = RestTemplate()
         val interceptors = arrayListOf<ClientHttpRequestInterceptor>()
@@ -24,5 +26,13 @@ class NotificationService {
         val firebaseResponse = restTemplate.postForObject(firebaseApiUrl, entity, String::class.java)
 
         return CompletableFuture.completedFuture(firebaseResponse)
+    }
+
+    @Async
+    @Transactional(rollbackFor = [Exception::class])
+    fun update() {
+        val notifications = PushPeriodicNotifications().periodicNotificationJson()
+        val request = HttpEntity<String>(notifications)
+        send(request)
     }
 }

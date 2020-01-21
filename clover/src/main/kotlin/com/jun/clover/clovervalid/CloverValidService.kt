@@ -1,6 +1,7 @@
 package com.jun.clover.clovervalid
 
 import com.jun.clover.cloverhistory.CloverHistoryRepository
+import com.jun.clover.notification.NotificationService
 import com.jun.clover.user.UserRepository
 import com.jun.clover.variable.Price
 import org.springframework.stereotype.Service
@@ -16,6 +17,7 @@ class CloverValidService (private val cloverValidRepository: CloverValidReposito
         cloverValidRepository.save(CloverValid(id))   // 클로버 추가
         userRepository.modifyPoint(id, -Price.CLOVER.get())  // 포인트 깎기
         cloverHistoryRepository.updatePrize()  // 당첨금 증가
+        NotificationService().update()
     }
 
     // 현재 구매된 클로버 리스트
