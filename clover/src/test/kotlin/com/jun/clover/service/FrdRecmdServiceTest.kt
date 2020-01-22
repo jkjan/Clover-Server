@@ -49,12 +49,12 @@ internal class FrdRecmdServiceTest (@Autowired private val frdRecmdService: FrdR
     @Order(13)
     fun `추천인 코드로 추천인 매칭`() {
         val beforeUser = userService.findUserById("test")
-        val idRecmder = frdRecmdService.matchRecmderByCode("IJVCID", "test3")
+        val idRecmder = frdRecmdService.matchRecmderByCode("YPXPCH", "test3")
         val afterUser = userService.findUserById("test")
         if (idRecmder != null) {
             println(idRecmder)
             assertEquals(
-                    (frdRecmdRepository.findById("IJVCID").get().idRecmdee == "test3"
+                    (frdRecmdRepository.findById("YPXPCH").get().idRecmdee == "test3"
                             && afterUser.get().point == beforeUser.get().point + Price.FRDRECMD.get()
                             ), true)
         }
