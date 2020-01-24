@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface CloverValidRepository : JpaRepository<CloverValid, Int> {
+    fun findCloverValidByPrcsrId(id : String) : List<CloverValid>
 }

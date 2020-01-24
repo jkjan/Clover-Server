@@ -14,8 +14,8 @@ class CloverValidService (private val cloverValidRepository: CloverValidReposito
     // 사용자가 클로버를 구매
     @Transactional(rollbackFor = [Exception::class])
     fun purchaseClover(id : String) {
-        cloverValidRepository.save(CloverValid(id))   // 클로버 추가
         userRepository.modifyPoint(id, -Price.CLOVER.get())  // 포인트 깎기
+        cloverValidRepository.save(CloverValid(id))   // 클로버 추가
         cloverHistoryRepository.updatePrize()  // 당첨금 증가
         NotificationService().update()
     }
@@ -25,4 +25,6 @@ class CloverValidService (private val cloverValidRepository: CloverValidReposito
 
     // 클로버 전체 삭제 (추첨 완료 시)
     fun deleteTodayClover() = cloverValidRepository.deleteAll()
+
+    fun getPurchasedCloverListById(id : String) = cloverValidRepository.findCloverValidByPrcsrId(id)
 }

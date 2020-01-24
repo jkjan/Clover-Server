@@ -15,4 +15,7 @@ class CloverValidController (private val cloverValidService: CloverValidService)
     // 클로버 전체 삭제
     @DeleteMapping(path = ["/clover/today"])
     fun deleteTodayClover() = cloverValidService.deleteTodayClover()
+
+    @GetMapping(path = ["/clover/{id}"])
+    fun getPurchasedCloverListById(@PathVariable(name = "id") id : String) : List<CloverValid> = cloverValidService.getPurchasedCloverListById(id)
 }

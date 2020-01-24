@@ -29,4 +29,7 @@ class UserController (private val userService: UserService) {
     // 아이디로 사용자 찾기
     @GetMapping(path = ["/user/{id}"])
     fun findUserById(@PathVariable ("id") id : String) = userService.findUserById(id)
+
+    @GetMapping(path = ["/user/{id}/point"])
+    fun findUserPointById(@PathVariable ("id") id : String) : Int = userService.findUserById(id).get().point
 }

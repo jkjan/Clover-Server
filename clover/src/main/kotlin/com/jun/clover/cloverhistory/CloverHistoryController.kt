@@ -22,4 +22,8 @@ class CloverHistoryController (private val cloverHistoryService : CloverHistoryS
     fun weGotWinnerHere(@PathVariable(name = "id_winner") idWinner : String) {
         cloverHistoryService.weGotWinnerHere(idWinner)
     }
+
+    // 오늘 당첨금
+    @GetMapping(path = ["/history/today/prize"])
+    fun getTodayPrize() : Int = this.getTodayClover().prizeClover
 }
