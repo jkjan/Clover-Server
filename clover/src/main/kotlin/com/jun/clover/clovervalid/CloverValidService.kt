@@ -10,14 +10,15 @@ import org.springframework.transaction.annotation.Transactional
 @Service
 class CloverValidService (private val cloverValidRepository: CloverValidRepository,
                           private val userRepository: UserRepository,
-                          private val cloverHistoryRepository: CloverHistoryRepository) {
+                          private val cloverHistoryRepository: CloverHistoryRepository,
+                          private val notificationService: NotificationService) {
     // 사용자가 클로버를 구매
     @Transactional(rollbackFor = [Exception::class])
     fun purchaseClover(id : String) {
         userRepository.modifyPoint(id, -Price.CLOVER.get())  // 포인트 깎기
         cloverValidRepository.save(CloverValid(id))   // 클로버 추가
         cloverHistoryRepository.updatePrize()  // 당첨금 증가
-        NotificationService().update()
+        notificationService.update()
     }
 
     // 현재 구매된 클로버 리스트

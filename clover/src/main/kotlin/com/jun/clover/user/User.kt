@@ -32,4 +32,7 @@ class User (
     // 계좌번호
     @Column(name = "acc")
     var acc : String? = null
+
+    @Column(name = "register_date", insertable = false, updatable = false)
+    var registerDate : String = ""
 }

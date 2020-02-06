@@ -8,9 +8,7 @@ import javax.validation.Valid
 class FrdRecmdController (private val frdRecmdService : FrdRecmdService) {
     // 친구 추천
     @PostMapping(path = ["/recommend"])
-    fun createFrdRecmd(idRecmder : String) {
-        frdRecmdService.createFrdRecmd(idRecmder)
-    }
+    fun createFrdRecmd(@Valid @NotNull @RequestBody idRecmder : String) = frdRecmdService.createFrdRecmd(idRecmder)
 
     // 추천인 코드 적용
     @PatchMapping(path = ["/recommend"])
